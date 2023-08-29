@@ -1,0 +1,60 @@
+@import "../Variables/Variables.scss";
+
+.map_div {
+    position: relative;
+}
+
+.selected_spot_div {
+    display: flex;
+    border: 1px solid $darkBlue;
+    height: 90px;
+    width: auto;
+    cursor: pointer;
+}
+
+.selected_spot_link {
+    text-decoration: none;
+    color: black;
+    &:active {
+        color: black;
+    }
+    &:visited {
+        color: black
+    }
+}
+
+.selected_spot_image_div {
+    height: 90px;
+    width: 100px;
+    margin-right: 20px;
+}
+
+.selected_spot_image {
+    border: 1px solid black;
+    margin-left: 10px;
+   
+    margin-top: 3px;
+    height: 80px;
+    width: auto;
+}
+
+.selected_spot_info_div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 30px;
+}
+
+.selected_spot_info_header {
+    margin-top: 3px;
+    margin-bottom: 0px;
+    font-weight: 700;
+    @include header (18px, black)
+}
+
+.selected_spot_info_about {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-weight: 300;
+    @include header (14px, $redColor);
+}

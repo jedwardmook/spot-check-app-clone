@@ -1,0 +1,75 @@
+@import "../Variables/Variables.scss";
+
+.review_div {
+    display: flex;
+    flex-direction: column;
+    margin: 30px;
+    border-bottom: 1px solid;
+}
+
+.review_main_div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review_author_photo {
+    height: 40px;
+    width: auto;
+    border: 1px solid $darkBlue;
+    border-radius: 3px;
+    margin-right: 10px;
+}
+
+.review_ratings_div {
+    display: flex;
+}
+
+.review_rating {
+    @include header(17px, black);
+    margin-left: 10px;
+}
+
+.review_bust_rating {
+    @include header(17px, $redColor);
+    margin-left: 15px;
+}
+
+.review_author_div {
+    display: flex;
+}
+
+.review_author_username {
+    margin-top: 10px;
+    font-weight: 700;
+    margin-right: 10px;
+    @include header(18px, $darkBlue)
+}
+
+.review_body {
+    font-family: $sanSarifFont;
+    font-weight: 300;
+    text-align: left;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.review_date {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: -10px;
+    padding-bottom: 10px;
+    @include header(16px,rgb(42, 42, 42))
+}
+
+.review_edit_div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.review_edit {
+    margin-left: 20px;
+    margin-bottom: 5px;
+    @include header(14px, $darkBlue);
+    cursor: pointer;
+    text-decoration: underline;
+}

@@ -1,0 +1,52 @@
+@import "../Variables/Variables.scss";
+
+.places_div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: $darkBlue;
+    height: 65px;
+}
+
+.places_input {
+    z-index: 2;
+    font-family: $sanSarifFont;
+    font-weight: 700;
+    color: $darkBlue;
+    margin-top: 10px;
+    @include input(13px, 13px, 13px, 13px, 40px);
+}
+
+.suggestions_div {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    width: 400px;
+    margin-top: -5px;
+    background-color: white;
+    border: 1px solid $darkBlue;
+    height: 10px;
+    font-family: $sanSarifFont;
+    font-weight: 700;
+    font-size: 18px;
+    list-style: none;
+}
+
+.suggestion {
+    background-color: white;
+    padding-top: 5px;
+    cursor: pointer;
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    color: $darkBlue;
+    &:hover {
+        background-color: $lightBlue;
+        color: $redColor;
+        font-weight: 700;
+    }
+}
+
+.places_div_header {
+    font-weight: 700;
+    @include header(20px, white);
+}

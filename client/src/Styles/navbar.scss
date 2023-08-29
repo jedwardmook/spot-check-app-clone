@@ -1,0 +1,104 @@
+@import "../Variables/Variables.scss";
+
+.navbar_div {
+    display: flex;
+    justify-content:space-between;
+    height: 60px;
+    width: 100%;
+    background-color: $darkBlue;
+}
+
+.navbar_logo {
+    position: absolute;
+    right: 0px;
+    margin-right: 10px;
+    height: 60px;
+    width: 120px;
+}
+
+.navbar_menu {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 5px;
+    background-color: $darkBlue;
+    border-radius: 11px;
+    height: 37px;
+    width: 37px;
+    margin-top: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.navbar_menu:hover {
+    border: 1px solid white
+}
+
+.dash {
+  @include dash
+}
+
+.navbar_user_menu {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    left: 0;
+    height: 40px;
+    width: 100%;
+    border: 1px solid $darkBlue;
+    margin-top: 49px;
+    background-color: white;
+    z-index: 1;
+}
+
+.menu_links {
+    @include link (135px)
+}
+
+.menu_link {
+    font-size: 18px;
+    margin-left: 10px;
+    height: 30px;
+    margin-top: -15px;
+}
+
+.add_spot_window {
+    z-index: 1;
+    @include opacityWindow;
+}
+
+.add_spot_div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: -100px;
+    @include formDiv(270px, 120px)
+}
+
+.add_spot_button_div {
+    display: flex;
+    justify-content: space-around;
+    margin-top: -35px;
+} 
+
+.add_spot_header {
+    margin-top: 0px;
+    font-weight: 700;
+    @include header (18px, white)
+}
+
+.add_spot_button {
+    @include button(0px, $lightBlue, white)
+}
+
+.cancel_button {
+    margin-left: 10px;
+    @include button(0px, white, $lightBlue)
+}
+
+.off {
+    @include off
+}

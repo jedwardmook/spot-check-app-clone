@@ -1,0 +1,68 @@
+@import "../Variables/Variables.scss";
+
+.edit_profile_window {
+    @include opacityWindow
+}
+
+.edit_profile_main_div {
+    @include formDiv(600px, 660px)
+}
+
+.edit_profile_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit_profile_username {
+    @include input(13px, 13px, 13px, 13px, 40px)
+}
+
+.edit_profile_photo_div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100px;
+    width: 130px;
+    border: 1px solid white;
+    border-radius: 13px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 3px;
+}
+
+.edit_profile_photo {
+    width: 120px;
+    height: 70px;
+    border-radius: 7px;
+    margin-bottom: 10px;
+}
+
+.edit_profile_photo_button_div {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.edit_profile_photo_button {
+    @include photoButton
+}
+
+.edit_profile_photo_button {
+    @include photoButton;
+    margin-top: 10px;
+}
+
+.edit_profile_name {
+    @include input(13px, 13px, 13px, 13px, 40px);
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.edit_profile_about {
+    margin-top: 10px;
+    @include input(13px, 13px, 13px, 13px, 100px)
+}
+
+.edit_profile_submit_button {
+    @include button(20px, $lightBlue, white)
+}

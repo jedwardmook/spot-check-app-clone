@@ -1,0 +1,175 @@
+@import "../Variables/Variables.scss";
+
+.display_spot_div {
+    display: flex;
+    flex-direction: column;
+}
+
+.display_spot_header_links {
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+}
+
+.display_spot_links {
+    display: flex;
+}
+
+.display_spot_link {
+    margin-top: -15px;
+    margin-left: 0px;
+    @include link(170px)
+}
+
+.header_link {
+    @include header_link
+}
+
+.display_spot_photos_div {
+    display: flex;
+    justify-content: center;
+    margin-left: 0;
+    border-top: 1px solid $darkBlue;
+    border-bottom: 1px solid $darkBlue;
+    height: 400px;
+    background-color: black;
+}
+
+.display_spot_primary_photo {
+    height: 400px;
+}
+
+.display_spot_photos_button_div {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.display_spot_photos_control_div{
+    display: flex;
+    justify-content: space-between;
+}
+
+.display_spot_photos_minus_button {
+    margin-top: -240px;
+    margin-left: 30px;
+    font-family: $sanSarifFont;
+    font-size: 50px;
+    cursor: pointer;
+    color: $darkBlue;
+    &:hover {
+        color: $lightBlue;
+        filter: opacity(90%);
+    }
+}
+
+.display_spot_photos_button {
+    margin-top: -240px;
+    margin-right: 30px;
+    font-family: $sanSarifFont;
+    font-size: 50px;
+    cursor: pointer;
+    color: $darkBlue;
+    &:hover {
+        color: $lightBlue;
+        filter: opacity(90%);
+    }
+}
+
+.display_spot_info_div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 40px;
+}
+
+.display_spot_ratings_div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.display_spot_ratings {
+    display: flex;
+    margin-right: 30px;
+}
+
+.display_spot_name {
+    color: $darkBlue;
+    font-family: $sanSarifFont;
+    font-weight: 700;
+    font-size: 26px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.display_spot_rating {
+    color: black;
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 14px;
+    margin-left: 35px;
+    margin-bottom: 0px;
+}
+
+.display_spot_bust {
+    color: $redColor;
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    font-size: 19px;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+.display_spot_address {
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.display_spot_about {
+    font-family: $sanSarifFont;
+    text-align: left;
+    font-weight: 300;
+    margin-top: 2px;
+    font-size: 16px;
+    margin-right: 25px;
+}
+
+.display_spot_attributes_header {
+    @include header(16px, $darkBlue)
+}
+
+.display_spot_attributes_div {
+    display: flex;
+    justify-content: left;
+    margin-left: 20px;
+}
+
+.display_spot_attributes {
+    margin: 0px 0px 20px 0px;
+    font-family: $sanSarifFont;
+    font-weight: 300;
+    text-align: left;
+    columns: 4;
+    column-gap: 30px;
+    -webkit-columns: 4;
+    -moz-columns: 4;
+}
+
+.display_spot_reviews_click {
+    margin-right: 40px;
+    margin-bottom: 20px;
+    text-align: right;
+    text-decoration: underline;
+    cursor: pointer;
+    @include header(16px, $darkBlue)
+}
+
+.delete_spot_div {
+    @include opacityWindow
+}
+
+

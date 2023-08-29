@@ -1,0 +1,134 @@
+@import "../Variables/Variables.scss";
+
+.add_spot_window {
+    @include opacityWindow
+}
+
+.add_spot_main_div {
+    margin-top: 120px;
+    margin-bottom: 25px;
+    @include formDiv(600px, 700px)
+}
+
+.add_spot_main_div_long {
+    margin-top: 120px;
+    margin-bottom: 25px;
+    @include formDiv(600px, 775px)
+}
+
+.add_spot_exit_button {
+    @include exit(10px, -10px, 10px)
+}
+
+.add_spot_form_div {
+    @include inputsDiv
+}
+
+.close {
+    @include link(1px)
+}
+
+.add_spot_address {
+    margin-top: -15px;
+    margin-bottom: 5px;
+    @include header(14px, $lightBlue)
+}
+
+.add_spot_top_input {
+    @include input(13px, 13px, 13px, 13px, 40px)
+}
+
+.add_spot_photo_button {
+    @include photoButton
+}
+
+.add_spot_photos_div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 110px;
+    width: 420px;
+    border: 1px solid white;
+    border-radius: 13px;
+    margin-left: 87px;
+    margin-top: 10px;
+    padding: 3px;
+}
+
+.filter_photo {
+    position: absolute;
+    font-family: $sanSarifFont;
+    font-weight: 700;
+    background-color: $lightBlue;
+    border-radius: 13px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.add_spot_photo_button_div {
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.add_spot_photo {
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    color: $darkBlue;
+    margin-right: 20px;
+    margin-left: 15px;
+}
+
+.add_spot_attributes_div {
+    display: flex;
+    justify-content: space-around;
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    color: $darkBlue;
+    height: 70px;
+    width: 400px;
+    margin-left: 100px;
+    border-radius: 13px;
+    background-color: $lightBlue;
+}
+
+label {
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    cursor: pointer;
+}
+
+.add_spot_attribute_pairs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 3px;
+}
+
+.add_spot_attributes_header {
+    margin-top: -23px;
+    margin-bottom: 0px;
+    @include header(17px, white);
+}
+
+.add_spot_textarea {
+    margin-top: 10px;
+    padding-top: 5px;
+    @include input(13px, 13px, 13px, 13px, 100px)
+}
+
+.add_spot_submit {
+    @include button (10px, $lightBlue, white)
+}
+
+.add_spot_errors_div {
+    display: flex;
+    justify-content: space-around;
+}
+
+.add_spot_error {
+    @include error_message;
+    margin-top: 20px;
+}

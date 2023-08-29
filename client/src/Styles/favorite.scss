@@ -1,0 +1,57 @@
+@import "../Variables/Variables.scss";
+
+.favorite_div {
+    display: flex;
+    justify-content: right;
+    height: 40px;
+    margin-top: -16px;
+}
+
+.favorite_spot_div {
+    display: flex;
+    width: 130px;
+    text-align: center;
+    cursor: pointer;
+    @include header(16px, $darkBlue);
+}
+
+.favorite_spot_div:hover .favorite_text {
+    visibility: visible;
+}
+
+.favorite_text {
+    visibility: hidden;
+}
+
+.favorite_heart {
+    margin-top: 16px;
+    font-size: 26px;
+}
+
+.favorite_spot_window {
+    @include opacityWindow
+}
+
+.favorite_spot_buttons_div {
+    @include formDiv(270px, 120px)
+}
+
+.favorite_spot_header {
+    @include header(18px, white);
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.favorite_spot_buttons {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.favorite_spot_yes_button {
+    @include button(-8px, $lightBlue, white)
+}
+
+.favorite_spot_cancel_button {
+    @include button(-8px, white, $lightBlue)
+}

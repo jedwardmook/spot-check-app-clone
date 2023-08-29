@@ -1,0 +1,50 @@
+@import "../Variables/Variables.scss";
+
+.login_div {
+    @include opacityWindow
+}
+
+.login_info_div {
+    @include formDiv(508px, 370px)
+}
+
+.login_info_div_errors {
+    @include formDiv(508px, 420px)
+}
+
+.login_form {
+    @include inputsDiv
+}
+
+.login_top {
+    @include input(13px, 13px, 0px, 0px, 40px)
+}
+
+.login_bottom {
+    @include input(0px, 0px, 13px, 13px, 40px)
+}
+
+.link {
+    @include link(120px);
+    margin-top: -9px;
+    margin-right: -290px;
+}
+
+.login_link {
+    @include header(11px, white);
+    text-decoration: underline;
+}
+
+.login_button {
+    @include button(20px, $lightBlue, white);
+    margin-top: 5px;
+}
+
+.login_error_div {
+    display: flex;
+    justify-content: space-around;
+}
+.login_error_info {
+    @include error_message;
+    margin-top: 20px;
+}

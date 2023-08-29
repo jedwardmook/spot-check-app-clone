@@ -1,0 +1,93 @@
+@import "../Variables/Variables.scss";
+
+.add_review_window {
+    @include opacityWindow
+}
+
+.add_review_main_div {
+    @include formDiv(550px, 500px)
+}
+
+.add_review_main_div_long {
+    @include formDiv(550px, 600px);
+}
+
+.add_review_exit_button {
+    @include exit(10px, -10px, 10px)
+}
+
+.close {
+    @include link(1px)
+}
+
+.add_review_form_div {
+    display: flex;
+    flex-direction: column;
+}
+
+.add_review_spot {
+    font-family: $sanSarifFont;
+    font-weight: 500;
+    color: $lightBlue;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+
+.add_review_select_div {
+    display: flex;
+    justify-content: space-around;
+    width: 350px;
+    height: 50px;
+    margin-left: 100px;
+}
+
+.add_review_select {
+    display: flex;
+    align-items: center;
+}
+
+.add_review_select_header {
+    font-weight: 500;
+    @include header(20px, white)
+}
+
+.review_select {
+    font-family: $sanSarifFont;
+    width: 40px;
+    height: 25px;
+    margin-left: 10px;
+    border-radius: 10px;
+}
+
+.add_review_descriptors {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 0px;
+    width: 350px;
+    margin-left: 110px;
+}
+
+.add_review_description {
+    @include header(12px, white);
+    margin-top: -9px;
+}
+
+.add_review_textarea {
+    height: 390px;
+    padding-top: 10px;
+    @include input(13px, 13px, 13px, 13px, 100px)
+}
+
+.add_review_submit {
+    @include button (10px, $lightBlue, white)
+}
+
+.add_review_errors_div {
+    display: flex;
+    justify-content: center
+}
+
+.add_review_error { 
+    @include error_message;
+    margin-top: 20px;
+}   

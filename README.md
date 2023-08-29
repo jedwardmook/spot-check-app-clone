@@ -1,19 +1,3 @@
-<style>
-  .logo {width: 75px;}
-  .center {display: flex; 
-          flex-direction: column;
-          align-items: center;
-          }
-  .title {
-        color: #005a9c;
-        font-size: 18px;
-  }
-  .header {
-        text-decoration: underline;
-        font-weight: 500;
-  }
-</style>
-
 <div class="center">
 <img class="logo" src="./client/public/spot_check-2.png" />
 <strong><p class="title">Spot Check</p></strong>

@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams, Link} from 'react-router-dom'
 import Review from './Review';
 import Favorite from './Favorite';
+import noPhoto from '../images/no_photo.jpeg';
 
 function Spot() {
     const {user} = useContext((UserContext))
@@ -66,17 +67,22 @@ function Spot() {
                 </div>
             </div>
             <div className="display_spot_photos_div">
+                {displaySpot.image_urls ? 
                 <img className="display_spot_primary_photo" alt={displaySpot.name} src={displaySpot.image_urls[photoToDisplay]}/>
+                :
+                <img className='display_spot_primary_photo' alt={displaySpot.name} src={noPhoto} />
+                }
+                
             </div>
             <div className="display_spot_photos_control_div">
-            {displaySpot.image_urls.length > 1 &&
+            {displaySpot.image_urls?
                 <div className="display_spot_photos_button_div">
                     <h5 onClick={decrementPhoto} className={photoToDisplay === 0? "off" : "display_spot_photos_minus_button"}>←</h5>
-                </div>}
-            {displaySpot.image_urls.length > 1 && 
+                </div> : ''}
+            {displaySpot.image_urls? 
                 <div className="display_spot_photos_button_div">
                     <h5 onClick={incrementPhoto} className={photoToDisplay === displaySpot.image_urls.length - 1? "off" : "display_spot_photos_button"}>→</h5>
-                </div>}
+                </div>: ''}
             </div>
             <div className="display_spot_info_div">
                 <div className='display_spot_ratings_div'>

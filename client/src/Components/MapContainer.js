@@ -9,11 +9,10 @@ import Places from "./Places";
 import { SwitchesContext } from "../context/switches";
 import { UserContext } from "../context/user";
 
-
 const containerStyle = {
     display: 'flex',
     width: "100%" ,
-    height: '500px'
+    height: '84.5vh'
 };
 
 const center = {
@@ -30,7 +29,6 @@ const options = {
 }
 
 const Libraries = ['places']
-
 
 function MapContainer({setSpotLat, setSpotLng}) {
     const {user} =useContext(UserContext)
@@ -101,21 +99,24 @@ function MapContainer({setSpotLat, setSpotLng}) {
                     {whereabouts && <Marker icon={{url:board, scaledSize:{width: 40, height: 60}}} position={whereabouts}/>}
                 </GoogleMap>
                 {selectedSpot && (
-                    <Link to={`/spots/${selectedSpot.id}`} className="selected_spot_link"><div className="selected_spot_div">
-                        <div className="selected_spot_image_div">
-                            <img className="selected_spot_image" alt="Spot" src={selectedSpot.image_urls[0] ? selectedSpot.image_urls[0] : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"} />
-                        </div>
-                        <div className="selected_spot_info_div">
-                            <h4 className="selected_spot_info_header">{selectedSpot.name}</h4>
-                            <h4 className="selected_spot_info_header">Rating: {selectedSpot.ratings_average? `${selectedSpot.ratings_average} ✶`: '5 ✶'}</h4>
-                            <p className="<selected_spot_info_about"><strong>About: </strong>{selectedSpot.about.substring(0,50)}...</p>
-                        </div>
-                    </div></Link>
+                    <div className="selected_spot_div">
+                        <Link to={`/spots/${selectedSpot.id}`} className="selected_spot_link">
+                            <div className="selected_spot_image_div">
+                                <img className="selected_spot_image" alt="Spot" src={selectedSpot.image_urls ? selectedSpot.image_urls[0] : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"} />
+                            </div>
+                            <div className="selected_spot_info_div">
+                                <h4 className="selected_spot_info_header">{selectedSpot.name}</h4>
+                                <h4 className="selected_spot_info_header">Rating: {selectedSpot.ratings_average? `${selectedSpot.ratings_average} ✶`: '5 ✶'}</h4>
+                                <p className="selected_spot_info_about"><strong>About: </strong>{selectedSpot.about.substring(0,50)}...</p>
+                            </div>    
+                        </Link>
+                        <button className="selected_spot_div_close" onClick={() => setSelectedSpot(null)}>X</button>
+                    </div>
                 )}
                 <Places
                     map={map}
-                    setWhereabouts={setWhereabouts}/>
-                
+                    setWhereabouts={setWhereabouts}
+                />
             </div>
         </LoadScript>
     )

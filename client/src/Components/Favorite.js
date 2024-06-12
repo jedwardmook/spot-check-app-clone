@@ -9,7 +9,7 @@ function Favorite({spot_id}) {
     const [spotFavorited, setSpotFavorited] = useState(false)
 
     useEffect(() => {
-        if (user.favorites_array.includes(spot_id)) {
+        if (user.favorites_array?.includes(spot_id)) {
             setSpotFavorited(!spotFavorited)
         }
     },[user.favorites_array])

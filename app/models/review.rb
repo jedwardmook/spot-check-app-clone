@@ -30,9 +30,9 @@ class Review < ApplicationRecord
         case bust_rating
         when 0
             "Zero"
-        when 1..2
+        when 1..1.9
             "Low"
-        when 2..3
+        when 2..2.9
             "Medium"
         when 3..4
             "High"

@@ -32,7 +32,6 @@ function EditReview() {
         }).then((response) => {
             if (response.ok) {
                 response.json().then((review) => {
-                    console.log(review)
                     navigate(`/spots/${state.spot_id}`)
                 })
             }else {
@@ -88,11 +87,10 @@ function EditReview() {
                                 onChange={(e) => setEditBustRating(e.target.value)}
                                 value={editBustRating}>
                                 <option value=""></option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
+                                <option value="0">Zero</option>
+                                <option value="1">Low</option>
+                                <option value="2">Medium</option>
+                                <option value="3">High</option>
                             </select>
                         </div>
                     </div>

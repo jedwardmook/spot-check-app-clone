@@ -38,6 +38,7 @@ function MapContainer({setSpotLat, setSpotLng}) {
     const [spots, setSpots] = useState([])
     const [selectedSpot, setSelectedSpot] = useState(null)
     const [favoriteSpots, setFavoriteSpots] = useState(null)
+    const [centerMap, setCenterMap] = useState(center)
 
     const handleClick = (e) => {
         setSpotLat(e.latLng.lat());
@@ -58,6 +59,14 @@ function MapContainer({setSpotLat, setSpotLng}) {
             }
             })
     }, [])
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setCenterMap({lat: position.coords.latitude, lng: position.coords.longitude})
+            }
+        )
+    })
 
     useEffect(() => {
         let arrayOfFavoriteSpots = []
@@ -89,14 +98,14 @@ function MapContainer({setSpotLat, setSpotLng}) {
             <div onClick={() => setIsClicked(false)} className="map_div">
                 <GoogleMap
                     mapContainerStyle={containerStyle}
-                    center={center}
+                    center={centerMap}
                     zoom={14}
                     options={options}
                     onLoad={map => setMap(map)}
                     onClick={handleClick}
                 >
                     {showFavorites && user.favorites_array.length > 0 ? favoritedSpotsToDisplay: allSpots}
-                    {whereabouts && <Marker icon={{url:board, scaledSize:{width: 40, height: 60}}} position={whereabouts}/>}
+                    {whereabouts&& <Marker icon={{url:board, scaledSize:{width: 40, height: 60}}} position={whereabouts}/>}
                 </GoogleMap>
                 {selectedSpot && (
                     <div className="selected_spot_div">

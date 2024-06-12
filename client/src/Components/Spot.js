@@ -1,7 +1,7 @@
 import '../Styles/spot.min.css';
 import { UserContext } from "../context/user";
 import { SwitchesContext } from '../context/switches';
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef, useMemo } from 'react'
 import { useParams, Link} from 'react-router-dom'
 import Review from './Review';
 import Favorite from './Favorite';
@@ -13,6 +13,8 @@ function Spot() {
     const [displaySpot, setDisplaySpot] = useState()
     const [showReviews, setShowReviews] = useState(false)
     const [photoToDisplay, setPhotoToDisplay] = useState(0)
+    const [sortCriteria, setSortCriteria] = useState(null)
+    const reviewsRef = useRef(null)
     
     let params = useParams()
     let displayId = params.spotId
@@ -25,16 +27,47 @@ function Spot() {
             } else {
             }
         })
-        }, [displayId])
+    }, [displayId])
 
-    let displayReviews = displaySpot && displaySpot.reviews.map((review, index) => {
+    const handleSortByCriteria = (criteria) => {
+        setSortCriteria(criteria);
+    };
+
+    const sortedReviews = useMemo(() => {
+        if (!displaySpot || !displaySpot.reviews) return [];
+
+        let reviews = [...displaySpot.reviews];
+
+        if (sortCriteria === 'rating') {
+            reviews.sort((a, b) => b.rating - a.rating);
+        }
+
+        if (sortCriteria === 'bust') {
+            const severityOrder = ['High', 'Medium', 'Low', 'Zero']
+            const bustSort = reviews.sort((a, b) => {
+                const aIndex = severityOrder.indexOf(a.bust_possibility)
+                const bIndex = severityOrder.indexOf(b.bust_possibility);
+                return aIndex - bIndex
+            });
+            reviews = bustSort
+        }
+
+        return reviews;
+    }, [displaySpot, sortCriteria]);
+
+    let displayReviews = sortedReviews.map((review, index) => {
         return <Review review={review} key={index} setDisplaySpot={setDisplaySpot}/>
     })
 
     const handleShowReviews = () => {
         setShowReviews(!showReviews)
-        window.scrollTo(0, 25000)
     }
+
+    useEffect(() => {
+        if (showReviews && reviewsRef.current) {
+            reviewsRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [showReviews])
 
     const incrementPhoto = () => {
         if (photoToDisplay < displaySpot.image_urls.length - 1)
@@ -46,6 +79,7 @@ function Spot() {
         setPhotoToDisplay(photoToDisplay - 1)
     }
 
+    console.log(navigator)
 
   return (
     displaySpot ? 
@@ -116,6 +150,11 @@ function Spot() {
                 </p>}
             {showReviews && <div>
                 <hr></hr>
+                <div ref={reviewsRef} className='display_spot_reviews_filters_container'>
+                    <h4>Sort reviews by:</h4>
+                    <button onClick={() => handleSortByCriteria('rating')}>Rating</button>
+                    <button onClick={() => handleSortByCriteria('bust')}>Kicked Out</button>
+                </div>
                 {displayReviews}
             </div>}
         </div> : <div>Spot Loading</div>

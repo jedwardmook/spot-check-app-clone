@@ -9,6 +9,8 @@ Favorite.reset_pk_sequence
 
 puts "seeding"
 
+user0 = User.create!(username: "guest!", password: "guestPW12", password_confirmation: "guestPW12", name: "Guest", bio: "Guest")
+
 user1 = User.create!(username: "tpuddd", password: "torey", password_confirmation: "torey", name: "Torey Pudwill", bio: "Teenage prodigy, game-changing video star, entrepreneur, all round advert for all that's great about skateboarding – Torey Pudwill is all these.")
 user1.photo.attach(io: File.open(Rails.root.join('client', 'src', 'images', 'Users', 'torey-pudwill.avif')), filename: 'torey-pudwill.avif', content_type: "application/avif")
 

@@ -27,7 +27,7 @@ class Spot < ApplicationRecord
                 "Zero"
             when 0.1..2
                 "Low"
-            when 2..3
+            when 2..2.9
                 "Medium"
             when 3..4
                 "High"

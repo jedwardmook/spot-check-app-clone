@@ -39,6 +39,30 @@ function LogIn() {
         setPassword("");
     }
 
+    const handleGuestLogin = () => {
+        fetch('/sessions', {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                username: 'guest!',
+                password: 'guestPW12',
+            }),
+        }).then((response) => {
+            if (response.ok) {
+                response.json().then((user) => {
+                    setUser(user);
+                    navigate("/");
+                })
+            } else {
+                response.json().then((errors) => setErrors(errors.errors))
+            }
+        })        
+        setUsername("");
+        setPassword("");
+    }
+
     return (
         <div className="login_div">
             <div className={errors? 'login_info_div_errors' : 'login_info_div'}>
@@ -58,7 +82,10 @@ function LogIn() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
-                <Link className='link' to='/signup'><p className='login_link'>sign up for an account</p></Link>
+                <div>
+                    <p className='login_link'>log in as <button onClick={() => handleGuestLogin()}>guest</button></p>
+                    <Link className='link' to='/signup'><p className='login_link'>sign up for an account</p></Link>
+                </div>
                 <button onClick={handleLogin} className="login_button">Submit</button>
             </div>
             {errors&& <div className="login_error_div">

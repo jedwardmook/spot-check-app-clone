@@ -43,7 +43,7 @@
 .navbar_user_menu {
     display: flex;
     justify-content: space-between;
-    position: fixed;
+    position: absolute;
     left: 0;
     height: 40px;
     width: 100%;
@@ -51,6 +51,7 @@
     margin-top: 49px;
     background-color: white;
     z-index: 1;
+    cursor: default;
 }
 
 .menu_links {

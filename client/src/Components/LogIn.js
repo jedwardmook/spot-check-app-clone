@@ -46,7 +46,7 @@ function LogIn() {
                 "Content-type": "application/json",
             },
             body: JSON.stringify({
-                username: 'guest!',
+                username: 'UserGuest',
                 password: 'guestPW12',
             }),
         }).then((response) => {
@@ -82,8 +82,8 @@ function LogIn() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     />
-                <div>
-                    <p className='login_link'>log in as <button onClick={() => handleGuestLogin()}>guest</button></p>
+                <div className='login_links_container'>
+                    <button className='login_guest_button' onClick={() => handleGuestLogin()}>log in as guest</button>
                     <Link className='link' to='/signup'><p className='login_link'>sign up for an account</p></Link>
                 </div>
                 <button onClick={handleLogin} className="login_button">Submit</button>

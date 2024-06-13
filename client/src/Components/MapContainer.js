@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import { GoogleMap, LoadScript, Marker} from "@react-google-maps/api"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import '../Styles/mapcontainer.min.css'
 import board from '../images/board.svg'
 import marker from '../images/marker.svg'
@@ -39,12 +39,17 @@ function MapContainer({setSpotLat, setSpotLng}) {
     const [selectedSpot, setSelectedSpot] = useState(null)
     const [favoriteSpots, setFavoriteSpots] = useState(null)
     const [centerMap, setCenterMap] = useState(center)
+    const navigate = useNavigate()
 
     const handleClick = (e) => {
-        setSpotLat(e.latLng.lat());
-        setSpotLng(e.latLng.lng());
-        setAddSpot(!addSpot)
-        setSelectedSpot(null)
+        if (user.id === 1) {
+            navigate("/register_account" , {state : { from : "MapContainer" }})
+        } else {
+            setSpotLat(e.latLng.lat());
+            setSpotLng(e.latLng.lng());
+            setAddSpot(!addSpot)
+            setSelectedSpot(null)
+        }
     }
 
     useEffect(() => {
@@ -66,18 +71,18 @@ function MapContainer({setSpotLat, setSpotLng}) {
                 setCenterMap({lat: position.coords.latitude, lng: position.coords.longitude})
             }
         )
-    })
+    }, [])
 
     useEffect(() => {
         let arrayOfFavoriteSpots = []
         user.favorites_array && user.favorites_array.map ((favorite, index) => {
             return fetch(`/spots/${favorite}`)
-                        .then((response) => {
-                        if (response.ok) {
+                .then((response) => {
+                    if (response.ok) {
                         response.json().then((spot) => arrayOfFavoriteSpots.push(spot));
-                        } else {
-                        }
-                        })
+                    } else {
+                    }
+                })
         })
         setFavoriteSpots(arrayOfFavoriteSpots)
     }, [user.favorites_array])

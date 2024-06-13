@@ -14,6 +14,7 @@ import AddReview from './AddReview';
 import EditSpot from './EditSpot';
 import EditProfile from './EditProfile';
 import EditReview from './EditReview';
+import Register from './Register';
 
 function App() {
   const [spotLat, setSpotLat] = useState(null)
@@ -28,40 +29,43 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path='/'
-          element={<MapContainer
-            setSpotLat={setSpotLat}
-            setSpotLng={setSpotLng}
+            element={<MapContainer
+              setSpotLat={setSpotLat}
+              setSpotLng={setSpotLng}
             />}
           />
           <Route exact path='addspot'
-          element={<AddSpot
-            spotLat={spotLat}
-            spotLng={spotLng}
+            element={<AddSpot
+              spotLat={spotLat}
+              spotLng={spotLng}
             />}
           />
           <Route path='signup'
-          element={<SignUp />}
+            element={<SignUp />}
           />
           <Route path='login'
-          element={<LogIn />}
+            element={<LogIn />}
           />
           <Route path='myprofile'
-          element={<MyProfile />}
+            element={<MyProfile />}
           />
           <Route path={`spots/:spotId`}
-          element={<Spot />}
+            element={<Spot />}
           />
           <Route path={`spots/add_review`}
-          element={<AddReview />}
+            element={<AddReview />}
           />
            <Route path={`spots/edit_review`}
-          element={<EditReview />}
+            element={<EditReview />}
           />
           <Route path={`spots/edit_spot`}
-          element={<EditSpot />}
+            element={<EditSpot />}
           />
           <Route path={`/edit_profile`}
-          element={<EditProfile />}
+            element={<EditProfile />}
+          />
+          <Route path={`/register_account`}
+            element={<Register />}
           />
       </Routes>
       </SwitchesProvider>

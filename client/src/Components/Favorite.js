@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/user';
 import '../Styles/favorite.min.css';
 
@@ -7,6 +8,7 @@ function Favorite({spot_id}) {
     const [openFavorite, setOpenFavorite] = useState(false)
     const [openUnfavorite, setOpenUnfavorite] = useState(false)
     const [spotFavorited, setSpotFavorited] = useState(false)
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (user.favorites_array?.includes(spot_id)) {
@@ -16,6 +18,9 @@ function Favorite({spot_id}) {
 
 
     const openFavoriteDiv = () => {
+        if (user.id === 1) {
+          navigate("/register_account", {state : {from : "Favorite" }})
+        }
         setOpenFavorite(!openFavorite)
     }
 

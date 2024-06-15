@@ -79,27 +79,26 @@ function Spot() {
         setPhotoToDisplay(photoToDisplay - 1)
     }
 
-    console.log(navigator)
-
   return (
     displaySpot ? 
-        <div onClick={() => setIsClicked(false)}className="display_spot_div">
-            <div className="display_spot_header_links">
-                <div className='display_spot_links'>
-                <Link className="display_spot_link" to="/spots/add_review" state={ displaySpot }>
-                    <h5 className="header_link">Add Review</h5>
-                </Link>
-                {user.id === displaySpot.user_id && 
-                <div className='display_spot_links'>
+      <div onClick={() => setIsClicked(false)}className="display_spot_div">
+          <div className="display_spot_header_links">
+            <div className='display_spot_links'>
+              <Link className="display_spot_link" to={user.id !== 1? "/spots/add_review" : "/register_account"} state={ {displaySpot, from: "Add Review"} }>
+                <h5 className="header_link">Add Review</h5>
+              </Link>
+            {user.id === displaySpot.user_id && 
+              <div className='display_spot_links'>
                 <Link className="display_spot_link" to="/spots/edit_spot" state={ displaySpot }>
-                    <h5 className="header_link">Edit Spot</h5>
+                  <h5 className="header_link">Edit Spot</h5>
                 </Link>
-                </div>}
-                </div>
-                <div>
-                <Favorite spot_id={displaySpot.id}/>
-                </div>
+              </div>
+            }
             </div>
+            <div>
+              <Favorite spot_id={displaySpot.id}/>
+            </div>
+          </div>
             <div className="display_spot_photos_div">
                 {displaySpot.image_urls ? 
                 <img className="display_spot_primary_photo" alt={displaySpot.name} src={displaySpot.image_urls[photoToDisplay]}/>

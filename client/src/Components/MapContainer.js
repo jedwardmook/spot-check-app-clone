@@ -94,6 +94,18 @@ function MapContainer({setSpotLat, setSpotLng}) {
     return <Marker key={index} icon={{url: favorite_marker, scaledSize: {width: 80, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => setSelectedSpot(spot)} />
   })
 
+  const handleMarkerClick = (spot) => {
+    if (selectedSpot === null) {
+      setSelectedSpot(spot)
+    } if (selectedSpot && selectedSpot.id !== spot) {
+      setSelectedSpot(spot)
+    } if (selectedSpot && selectedSpot.id === spot.id) {
+      setSelectedSpot(null)
+    }
+  }
+
+  console.log(selectedSpot)
+
   const handleFilterRating = (e) => {
     setFilterRating(e.target.value)
   }
@@ -121,7 +133,7 @@ function MapContainer({setSpotLat, setSpotLng}) {
   })
   
   const allSpots = filteredTerrainsSpots.map((spot, index) => {
-    return <Marker key={index} icon={{url: marker, scaledSize: {width: 60, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => setSelectedSpot(spot)}/>
+    return <Marker key={index} icon={{url: marker, scaledSize: {width: 60, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => handleMarkerClick(spot)}/>
   })
 
   return (

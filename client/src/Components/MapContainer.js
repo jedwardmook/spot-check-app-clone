@@ -8,6 +8,7 @@ import favorite_marker from '../images/favorite_marker.svg'
 import Places from "./Places";
 import { SwitchesContext } from "../context/switches";
 import { UserContext } from "../context/user";
+import SpotFilter from "./SpotFilter";
 
 const containerStyle = {
   display: 'flex',
@@ -40,6 +41,7 @@ function MapContainer({setSpotLat, setSpotLng}) {
   const [favoriteSpots, setFavoriteSpots] = useState(null)
   const [centerMap, setCenterMap] = useState(center)
   const [filterRating, setFilterRating] = useState(0)
+  const [terrainsChecked, setTerrainsChecked] = useState([])
   const navigate = useNavigate()
 
   const handleClick = (e) => {
@@ -66,92 +68,107 @@ function MapContainer({setSpotLat, setSpotLng}) {
       });
     }, [])
 
-    useEffect(() => {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setCenterMap({lat: position.coords.latitude, lng: position.coords.longitude})
-        }
-      )
-    }, [])
-
-    useEffect(() => {
-      let arrayOfFavoriteSpots = []
-      user.favorites_array && user.favorites_array.map ((favorite, index) => {
-        return fetch(`/spots/${favorite}`)
-          .then((response) => {
-            if (response.ok) {
-              response.json().then((spot) => arrayOfFavoriteSpots.push(spot));
-            } else {
-            }
-          })
-      })
-      setFavoriteSpots(arrayOfFavoriteSpots)
-    }, [user.favorites_array])
-
-    const favoritedSpotsToDisplay = favoriteSpots && favoriteSpots.map((spot, index) => {
-      return <Marker key={index} icon={{url: favorite_marker, scaledSize: {width: 80, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => setSelectedSpot(spot)} />
-    })
-
-    const handleFilterRating = (e) => {
-      setFilterRating(e.target.value)
-    }
-
-    const filteredSpots = spots.filter((spot) => spot.ratings_average > filterRating);
-     
-    const allSpots = filteredSpots.map((spot, index) => {
-        return <Marker key={index} icon={{url: marker, scaledSize: {width: 60, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => setSelectedSpot(spot)}/>
-    })
-
-    return (
-        <LoadScript
-          googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-          libraries={Libraries}
-          >
-          <div onClick={() => setIsClicked(false)} className="map_div">
-            <div>
-              Filter spots:
-                <label>Rating</label>
-                <select value={filterRating} onChange={handleFilterRating}>
-                  <option value="0">All</option>
-                  <option value="4">4+</option>
-                  <option value="3">3+</option>
-                  <option value="2">2+</option>
-                  <option value="1">1+</option>
-                </select>
-            </div>
-            <GoogleMap
-              mapContainerStyle={containerStyle}
-              center={centerMap}
-              zoom={14}
-              options={options}
-              onLoad={map => setMap(map)}
-              onClick={handleClick}
-              >
-                {showFavorites && user.favorites_array.length > 0 ? favoritedSpotsToDisplay: allSpots}
-                {whereabouts&& <Marker icon={{url:board, scaledSize:{width: 40, height: 60}}} position={whereabouts}/>}
-            </GoogleMap>
-              {selectedSpot && (
-                <div className="selected_spot_div">
-                  <Link to={`/spots/${selectedSpot.id}`} className="selected_spot_link">
-                    <div className="selected_spot_image_div">
-                      <img className="selected_spot_image" alt="Spot" src={selectedSpot.image_urls ? selectedSpot.image_urls[0] : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"} />
-                    </div>
-                    <div className="selected_spot_info_div">
-                      <h4 className="selected_spot_info_header">{selectedSpot.name}</h4>
-                      <h4 className="selected_spot_info_header">Rating: {selectedSpot.ratings_average? `${selectedSpot.ratings_average} ✶`: '5 ✶'}</h4>
-                      <p className="selected_spot_info_about"><strong>About: </strong>{selectedSpot.about.substring(0,50)}...</p>
-                    </div>    
-                  </Link>
-                  <button className="selected_spot_div_close" onClick={() => setSelectedSpot(null)}>X</button>
-                </div>
-                )}
-            <Places
-              map={map}
-              setWhereabouts={setWhereabouts}
-            />
-          </div>
-        </LoadScript>
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setCenterMap({lat: position.coords.latitude, lng: position.coords.longitude})
+      }
     )
+  }, [])
+
+  useEffect(() => {
+    let arrayOfFavoriteSpots = []
+    user.favorites_array && user.favorites_array.map ((favorite, index) => {
+      return fetch(`/spots/${favorite}`)
+        .then((response) => {
+          if (response.ok) {
+            response.json().then((spot) => arrayOfFavoriteSpots.push(spot));
+          } else {
+          }
+        })
+    })
+    setFavoriteSpots(arrayOfFavoriteSpots)
+  }, [user.favorites_array])
+
+  const favoritedSpotsToDisplay = favoriteSpots && favoriteSpots.map((spot, index) => {
+    return <Marker key={index} icon={{url: favorite_marker, scaledSize: {width: 80, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => setSelectedSpot(spot)} />
+  })
+
+  const handleFilterRating = (e) => {
+    setFilterRating(e.target.value)
+  }
+
+  const filteredRatingsSpots = spots.filter((spot) => spot.ratings_average > filterRating);
+
+  const handleTerrainsChecked = (e) => {
+    const value = e.target.value
+    if (e.target.checked) {
+      setTerrainsChecked([...terrainsChecked, value])
+    } else {
+      setTerrainsChecked(terrainsChecked.filter((v) => v !== value))
+    }
+  }
+  
+  const filteredTerrainsSpots = filteredRatingsSpots.filter((ratingsSpot) => {
+    if (terrainsChecked.includes("flat_bar") && !ratingsSpot.flat_bar) return false;
+    if (terrainsChecked.includes("handrail") && !ratingsSpot.handrail) return false;
+    if (terrainsChecked.includes("gap") && !ratingsSpot.gap) return false;
+    if (terrainsChecked.includes("ledge") && !ratingsSpot.ledge) return false;
+    if (terrainsChecked.includes("transition") && !ratingsSpot.transition) return false;
+    if (terrainsChecked.includes("bank") && !ratingsSpot.bank) return false;
+    if (terrainsChecked.includes("stairs") && !ratingsSpot.stairs) return false;
+    return true
+  })
+  
+  const allSpots = filteredTerrainsSpots.map((spot, index) => {
+    return <Marker key={index} icon={{url: marker, scaledSize: {width: 60, height: 60}}} position={spot.lat_lng} clickable={true} onClick={() => setSelectedSpot(spot)}/>
+  })
+
+  return (
+      <LoadScript
+        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        libraries={Libraries}
+        >
+        <div onClick={() => setIsClicked(false)} className="map_div">
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={centerMap}
+            zoom={14}
+            options={options}
+            onLoad={map => setMap(map)}
+            onClick={handleClick}
+            >
+              {showFavorites && user.favorites_array.length > 0 ? favoritedSpotsToDisplay: allSpots}
+              {whereabouts&& <Marker icon={{url:board, scaledSize:{width: 40, height: 60}}} position={whereabouts}/>}
+          </GoogleMap>
+          <SpotFilter 
+            filterRating={filterRating}
+            handleFilterRating={handleFilterRating}
+            terrainsChecked={terrainsChecked}
+            handleTerrainsChecked={handleTerrainsChecked}
+          />
+            {selectedSpot && (
+              <div className="selected_spot_div">
+                <Link to={`/spots/${selectedSpot.id}`} className="selected_spot_link">
+                  <div className="selected_spot_image_div">
+                    <img className="selected_spot_image" alt="Spot" src={selectedSpot.image_urls ? selectedSpot.image_urls[0] : "https://user-images.githubusercontent.com/24848110/33519396-7e56363c-d79d-11e7-969b-09782f5ccbab.png"} />
+                  </div>
+                  <div className="selected_spot_info_div">
+                    <h4 className="selected_spot_info_header">{selectedSpot.name}</h4>
+                    <h4 className="selected_spot_info_header">Rating: {selectedSpot.ratings_average? `${selectedSpot.ratings_average} ✶`: '5 ✶'}</h4>
+                    <p className="selected_spot_info_about"><strong>About: </strong>{selectedSpot.about.substring(0,50)}...</p>
+                  </div>    
+                </Link>
+                <button className="selected_spot_div_close" onClick={() => setSelectedSpot(null)}>X</button>
+              </div>
+              )}
+          <Places
+            map={map}
+            setWhereabouts={setWhereabouts}
+          />
+        </div>
+      </LoadScript>
+  )
 }
 
 export default MapContainer;

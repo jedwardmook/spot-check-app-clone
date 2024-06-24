@@ -1,8 +1,8 @@
 @import "../Variables/Variables.scss";
 
 .map_div {
-    position: relative;
-    z-index: 0;
+  position: relative;
+  z-index: 0;
 }
 
 .selected_spot_div {
@@ -49,7 +49,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 30px;
+    margin-left: 1rem;
 }
 
 .selected_spot_info_header {
@@ -60,10 +60,14 @@
 }
 
 .selected_spot_info_about {
-    display: flex;
-    margin-top: 7px;
+  display: flex;
+    margin-top: 5px;
     margin-bottom: 0px;
     font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 60vw;
 }
 
 .selected_spot_div_close {

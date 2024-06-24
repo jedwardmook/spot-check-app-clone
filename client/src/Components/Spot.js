@@ -151,8 +151,8 @@ function Spot() {
                 <hr></hr>
                 <div ref={reviewsRef} className='display_spot_reviews_filters_container'>
                     <h4>Sort reviews by:</h4>
-                    <button onClick={() => handleSortByCriteria('rating')}>Rating</button>
-                    <button onClick={() => handleSortByCriteria('bust')}>Kicked Out</button>
+                    <button className="display_spot_reviews_filter" onClick={() => handleSortByCriteria('rating')}>Rating</button>
+                    <button className="display_spot_reviews_filter" onClick={() => handleSortByCriteria('bust')}>Bust</button>
                 </div>
                 {displayReviews}
             </div>}

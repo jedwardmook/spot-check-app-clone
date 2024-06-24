@@ -9,11 +9,11 @@ function AddReview() {
     let navigate = useNavigate()
     const state = location.state
     const { user } = useContext(UserContext)
-    const [spotId, setSpotId] = useState(state.id)
+    const [spotId] = useState(state.displaySpot.id)
     const [rating, setRating] = useState()
     const [bustRating, setBustRating] = useState()
     const [body, setBody] = useState()
-    const [userId, setUserId] = useState(user.id)
+    const [userId] = useState(user.id)
     const [errors, setErrors] = useState()
 
     const handleSelectRating = (e) => {
@@ -57,7 +57,7 @@ function AddReview() {
             <Link  className='close' to={`/spots/${spotId}`}><h5 className="add_review_exit_button">x</h5></Link>
                 <img className="logo" src={logo} alt="Spot Check"/>
                 <h1 className='welcome'>Add your review</h1>
-                <h2 className='add_review_spot'>{state.name}</h2>
+                <h2 className='add_review_spot'>{state.displaySpot.name}</h2>
             <div className="add_review_form_div">
                 <form onSubmit={handleSubmitReview}>
                     <div className="add_review_select_div">
@@ -103,7 +103,7 @@ function AddReview() {
                     </div>
                 </form>
                 {errors && <div>{errors.map((error, index) => {
-                return <div className="add_review_errors_div"><h5 className="add_review_error">- {error} -</h5></div>}
+                  return <div className="add_review_errors_div"><h5 className="add_review_error">- {error} -</h5></div>}
                 )}
                 </div>}
             </div>

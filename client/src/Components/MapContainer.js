@@ -168,7 +168,7 @@ function MapContainer({setSpotLat, setSpotLng}) {
                   <div className="selected_spot_info_div">
                     <h4 className="selected_spot_info_header">{selectedSpot.name}</h4>
                     <h4 className="selected_spot_info_header">Rating: {selectedSpot.ratings_average? `${selectedSpot.ratings_average} ✶`: '5 ✶'}</h4>
-                    <p className="selected_spot_info_about"><strong>About: </strong>{selectedSpot.about.substring(0,50)}...</p>
+                    <p className="selected_spot_info_about"><strong>About:</strong> {selectedSpot.about}</p>
                   </div>    
                 </Link>
                 <button className="selected_spot_div_close" onClick={() => setSelectedSpot(null)}>X</button>
